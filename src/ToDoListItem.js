@@ -1,32 +1,50 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-class ListItem extends Component {
-  handleItemClick = (e) => {
-		const { onItemClick } = this.props;
-		onItemClick(e.target.id);
-	}
+class TodoItem extends Component {
+  componentDidMount() {
+    if (this._listItem) {
+      this._listItem.classList.add("highlight");
+      setTimeout(
+        listItem => {
+          listItem.classList.remove("highlight");
+        },
+        500,
+        this._listItem
+      );
+    }
+  }
 
-	render() {
-		const {
-			children,
-			id,
-			status,
-		} = this.props;
-	return(
-			<li
-				id={id}
-				onClick={this.handleItemClick}
-				data-status={status}
-				style={
-                  status ? 
-                  { textDecoration: 'line-through' } : 
-                  { textDecoration: 'none' }
-                }
-			>
-				{children}
-			</li>
-		);
-	}
+  markCompleted = event => {
+    this.props.onItemCompleted(this.props.id);
+  };
+
+  deleteItem = event => {
+    this.props.onDeleteItem(this.props.id);
+  };
+
+  render() {
+    var itemClass =
+      "form-check todoitem " + (this.props.completed ? "done" : "undone");
+    return (
+      <li className={itemClass} ref={li => (this._listItem = li)}>
+        <label className="form-check-label">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            onChange={this.markCompleted}
+          />
+          {this.props.text}
+        </label>
+        <button
+          type="button"
+          className="btn btn-danger btn-sm"
+          onClick={this.deleteItem}
+        >
+          x
+        </button>
+      </li>
+    );
+  }
 }
 
-export default ListItem
+export default TodoItem;

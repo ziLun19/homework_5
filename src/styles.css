@@ -1,0 +1,26 @@
+.apptitle {
+    margin: 1rem 0;
+    text-align: center;
+    font-size: 50px;
+  }
+  
+  .form-control {
+    font-size: 20px;
+    height: 2px;
+    padding: 10px;
+    color: gray;
+  }
+  .todolist .todoitem.done .form-check-label {
+    color: #999;
+    text-decoration: line-through;
+  }
+  .todolist .todoitem .btn-danger {
+    position: absolute;
+  }
+  .todolist .todoitem .form-check-label {
+    width: 100%;
+  }
+  .todolist .todoitem .form-check-label .form-check-input {
+    margin: 'auto',
+  }
+  
